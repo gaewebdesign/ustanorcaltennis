@@ -7,9 +7,10 @@
 
 # Version 2 - For Python 2.7 
 # Version 3 - For Lowell/Wash
+# Version 4 - Post-Covid 
 
 application: ustanorcaltennis
-version: 3 
+version: 4 
 runtime: python27
 api_version: 1
 threadsafe: true
