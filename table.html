@@ -1,0 +1,45 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+</style>
+<body>
+<SCRIPT LANGUAGE="JavaScript" SRC="assets/javascript/sorttable.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" SRC="assets/javascript/library.js"></SCRIPT>
+
+<table align="center" class="sortable" >
+<thead>
+<tr><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Email</th><th scope="col">Phone</th><th scope="col">Res</th><th scope="col">NTRP</th><th scope="col">Member</th></tr>
+</thead>
+
+<div align="center">
+<p><br>
+<center>Legend &nbsp;
+&#149;&nbsp; Email for social play&nbsp;
+</center>
+</div>
+
+<center>Click the top row to sort </center>
+
+{% for c in results %}
+<tr>
+<td> {{c.first}}</td>
+<td> {{c.last}}</td>
+<td> {{c.email}}</td>
+<td> {{c.phone}}</td>
+<td> {{c.address}}</td>
+<td> {{c.ntrp}}</td>
+<td> {{c.year}}</td>
+
+</tr>
+
+{% endfor %}
+
+
+</html>
+

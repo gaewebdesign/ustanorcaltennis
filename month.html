@@ -1,0 +1,85 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("/assets/css/courts.css");
+-->
+</style>
+<!--
+http://www.fieldofschemes.com/newstyles.css
+-->
+<body>
+<title>Month</title>
+<div id=containerlogin>
+ {{ LoginForm }} 
+
+ {% if StartDate %}
+ <div id=containerstart>
+   Reservations Start: {{StartDate}}   {{StartTime}} 
+ </div>
+ {% endif %}
+
+</div>
+
+
+
+<center>
+<h1>{{monthname}} {{year}} </h1>
+
+<div id = "containertop">
+<a href="{{Host}}/instructions">Instructions</a><br>
+<a href="{{Host}}/summary">Summary of Reservations</a><br>
+<a href="{{Host}}/captain">Captain's Page</a><br><br>
+<a href= "{{Host}}/month/{{Prev_month}}/{{Prev_year}}" >Previous Month</a> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<a href= "{{Host}}/month/{{Next_month}}/{{Next_year}}" >Next Month</a> 
+</div>
+
+<div id = "container">
+<br>
+<table id="month">
+<thead>
+<tr>
+<th class="weekend" >Monday</th>
+<th >Tuesday</th >
+<th >Wednesday</th >
+<th >Thursday</th > 
+<th >Friday</th >
+<th class="weekend">Saturday</th >
+<th class="weekend" >Sunday</th >
+</tr>
+</thead >
+<tbody>
+
+{% for week in Month %}
+   <tr>
+   {% for day in week %}
+      <td class="{{day.classtype}}"> <a href="{{Host}}/courts/{{day.month}}/{{day.day}}/{{day.year}}"> {{ day.day }}</a>
+
+      {{ day.holiday }} <br>
+<span style="font-family: verdana,sans-serif; font-size:12px;">
+      {% for c in day.courts %}
+
+          {{c.time}} 
+          {% if c.mine %}
+            <b>
+          {% endif %}
+          {{c.cts}}
+          {% if c.mine %}
+            </b>
+          {% endif %}
+          <br>
+
+      {% endfor %}
+</pan>
+
+   {% endfor %}
+   </tr>
+{% endfor %}
+
+</div>
+
+
+

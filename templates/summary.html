@@ -1,0 +1,111 @@
+<html>
+<head>
+</head>
+<!--
+<style type = "text/css"> 
+@import url("assets/css/library.css");
+
+-->
+<style type = "text/css"> 
+<!--
+
+@import url("assets/css/patc.css");
+
+@import url("assets/css/courts.css");
+-->
+</style>
+<body>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/sorttable.js"></script>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/library.js"></script>
+<body>
+<!--
+<div id=containerlogin>
+ {{ LoginForm }} 
+</div>
+-->
+
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name="path" value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+
+{% endif %}
+
+</form>
+</div>
+
+<center>
+
+<h1> Court Reservations </h1>
+
+{% if LoggedIn %}
+<table>
+<b>Captain {{ CaptainReservation.fname }} {{ CaptainReservation.lname }} {{ CaptainReservation.team }} </b>
+<thead>
+
+<tr>
+<th scope="col">Date</th>
+<th scope="col">Day</th>
+<th scope="col">Courts</th>
+<th scope="col">Location</th>
+<th scope="col">Time</th>
+<th scope="col">Description</th>
+</thead>
+
+{% for e in CaptainReservation.courts %}
+<tr>
+<td>{{e.date}} </td>
+<td>{{e.weekday}} </td>
+<td>{{e.courts}} </td>
+<td>{{e.location}} </td>
+<td>{{e.start}} -> {{e.end}} </td>
+<td>{{e.desc}}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endif  %}
+
+<p>
+<br>
+<!--<h3> Reservations by other Captains </h3> -->
+
+<b> Click on the top row to sort </b>
+ <table align="center" class="sortable">
+ <thead>
+ <tr>
+
+ <th scope="col">Date</th>
+ <th scope="col">Day</th>
+ <th scope="col">Courts</th>
+ <th scope="col">Location</th>
+ <th scope="col">Time</th>
+ <th scope="col">Captain</th>
+ <th scope="col">Team</th>
+
+ </thead>
+
+{% for e in Courts %}
+<tr>
+<td>{{e.date}} </td>
+<td>{{e.weekday}} </td>
+<td>{{e.courts}} </td>
+<td>{{e.location}} </td>
+<td>{{e.start}} -> {{e.end}} </td>
+<td>{{e.captain}}</td>
+<td>{{e.team}}</td>
+</tr>
+{% endfor %}
+
+
+</table>
+
+

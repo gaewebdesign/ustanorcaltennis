@@ -1,0 +1,170 @@
+# app.yaml 
+# dev_appserver.py cupertinousta
+# appcfg.py update cupertinousta
+# grep -rl "string" /path
+# roger.okamoto@gmail.com
+
+
+# Version 2 - For Python 2.7 
+# Version 3 - For Lowell/Wash
+
+application: ustanorcaltennis
+version: 3 
+runtime: python27
+api_version: 1
+threadsafe: true
+env_variables:
+   HOMECOURTS: 'Cuesta'
+
+
+handlers:
+
+#- url : /favicon.ico
+#  static_files: static/images/favicon.ico
+#  upload: static/images/favicon.ico
+
+- url: /*.
+  script: main.app
+
+- url: /assets
+  static_dir: assets
+
+- url: /month/([\d]*)/([\d]*)
+  script: month.app
+
+# TO ALLOW deletion of a RESERVATION from the month UI
+# appended with _
+- url: /month_/([\d]*)/([\d]*)
+  script: delmonth.app
+
+- url: /delcourtconfirm
+  script: delmonth.app
+
+- url: /delcourt
+  script: delmonth.app
+
+
+- url: /courts/([\d]*)/([\d]*)/([\d]*)
+  script: courts.app
+
+- url: /reserve
+  script: courts.app
+
+# List all court resevations
+- url: /summary
+  script: summary.app
+
+# by date
+- url: /bydate
+  script: summary.app
+
+
+# Edit Captain court resevations (only captain sees)
+- url: /captain
+  script: captain.app
+
+- url: /unreserve
+  script: captain.app
+
+# Captain can change password
+- url: /pwchange
+  script: captain.app
+
+- url: /login
+  script: logger.app
+
+- url: /logout
+  script: logger.app
+
+# to testcases ----------
+#- url: /all
+#  script: testcases.app
+
+# fill some of the reservation dates 
+#- url: /partial
+#  script: testcases.app
+
+
+# to test new code ----------
+
+- url: /test
+  script: test.app
+
+
+# Instructions
+
+- url: /instruct[\w]*
+  script: instructions.app
+
+
+# Not used anymore -----------
+#- url: /query
+#  script: ustacal.py
+
+
+# Admin -----------
+
+- url: /admin
+  script: admin.app  
+
+# Modify/Delete Courts
+- url: /all
+  script: all.app  
+
+- url: /alldelconfirm
+  script: all.app  
+
+
+- url: /alldel
+  script: all.app  
+
+- url: /doschedule
+  script: admin.app  
+
+
+# change date that reservations start
+- url: /doopen
+  script: admin.app  
+
+# edit the captain password/count values
+- url: /doeditcapt
+  script: admin.app  
+
+- url: /doaddcapt
+  script: admin.app  
+
+# ADMIN  Delete using the Month UI
+- url: /delmonth/([\d]*)/([\d]*)
+  script: delmonth.app  
+
+- url: /dodelmonth
+  script: delmonth.app  
+
+- url: /_courts/([\d]*)/([\d]*)/([\d]*)
+  script: delmonth.app
+
+# ADMIN create captain/courts, delete captain/courts
+
+- url: /create
+  script: create.app
+
+- url: /dodelete
+  script: create.app
+
+- url: /doccapt
+  script: create.app
+
+- url: /doccourts
+  script: create.app
+
+#- url: /done
+#  script: month.py
+
+#- url: /member
+#  script: month.py
+
+#- url: /cstyle
+#  script: cstyle.py
+
+#- url: /table
+#  script: table.py

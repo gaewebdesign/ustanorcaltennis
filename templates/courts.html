@@ -1,0 +1,114 @@
+<html>
+<head>
+<!--
+<body bgcolor= "#5b98c6">
+<body bgcolor= "var(--colorpurple)">
+-->
+
+</head>
+
+<style type = "text/css"> 
+
+<!--
+@import url("/assets/css/courts.css");
+-->
+
+body {
+   background-color: #5b98c6;
+   background-color: var(--colorpurple);
+}
+
+</style>
+
+<body>
+
+<title>Courts</title>
+
+<div id=containerlogin2>
+
+
+{% if LoggedIn %}
+<form name="Logout" action="{{Host}}/logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name='path' value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="{{Host}}/login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+
+{% endif %}
+
+</form>
+</div>
+
+
+<center>
+<div style= "background-color :var(--colorpurple);">
+<h1>Courts Available for {{month}}/{{day}}/{{year}} </h1>
+<p>
+<h2>Select the courts for your team  </h2>
+</center>
+
+
+
+<center>
+<table width=500>
+<thead>
+<tr>
+<th scope="col">Select</th>
+<th scope="col">Courts</th>
+<th scope="col">Location</th>
+<th scope="col" align="center">Time</th>
+<th scope="col" align="left">Description
+</tr>
+</thead>
+<!--
+<form name="reserve" action="{{Site}}" method="POST">
+-->
+<form name="reserve" action="/reserve" method="POST">
+{% for e in  Courtlist %}
+ <tr>
+
+   {% if e.open %}
+     <td width=50><input type="radio" name="courts" value="{{e.key}}"> </td>
+   {% else %}
+     <td width=65>{{ e.owner }} </td>
+   {% endif %}
+
+  <td width=70>{{e.courts}}</td>
+  <td width=70>{{e.location}}</td>
+
+  <td width=150>{{e.start}} - {{e.end}} </td>
+  <td width=150>{{e.desc}} </input> </td>
+ </tr>
+{% endfor %}
+</table>
+{% if Available  %}
+<input type="submit" value="Reserve a Court!" />
+{% else %}
+No available courts
+{% endif %}
+
+</form>
+
+
+
+<!--
+<center>
+
+<form name="reserve" action="{{Site}}" method="POST">
+{% for e in  Courtlist %}
+
+ <input type="radio" name="courts" value="{{e.key}}"> {{e.start}} - {{e.end}} <br>
+  </input>
+{% endfor %}
+<input type="submit" value="Reserve a Court!" />
+</form>
+
+</center>
+
+-->
+

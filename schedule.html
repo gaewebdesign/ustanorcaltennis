@@ -1,0 +1,259 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+</style>
+<body>
+
+<style type = "text/css">
+#sch {
+#      position:absolute;
+       left: 200px;
+#       top: 50px;
+       border:1px solid;
+       width:500px; height:200px; 
+       background:#e8f6f9; overflow:hidden; 
+       background:#d1e8ff; overflow:hidden; 
+       padding:4px 6px 18px 12px; 
+       margin-top:5px 
+       margin-bottom:5px;}
+
+
+#open {
+#      position:absolute;
+       left: 200px;
+#      top: 300px;
+       border:1px solid;
+       width:500px; height:90px; 
+       background:#e8f6f9; overflow:hidden; 
+       background:#d1e8ff; overflow:hidden; 
+       padding:4px 6px 18px 12px; 
+       margin-top:5px 
+       margin-bottom:5px;
+}
+
+#capt {
+#      position:absolute;
+       left: 200px;
+#      top: 450px;
+       border:2px solid;
+       width:500px; height:75px; 
+       background:#e8f6f9; overflow:hidden; 
+       padding:4px 6px 18px 12px; 
+       margin-top:5px 
+       margin-bottom:5px;
+}
+
+
+
+</style>
+
+
+<center>
+
+<div id=sch>
+<p>
+
+<form name="schedule" action="{{Site}}/doschedule" method="POST">
+
+Starting
+<select name="m">
+{% for e in Months %}
+  <option value="{{e.number}}"> {{e.month}} </option>
+{% endfor %}
+</select>
+&nbsp;
+
+
+<select name="d">
+{% for e in Days %}
+  {% if e.selected %}
+   <option value="{{e.day}}" selected> {{e.day}} </option>
+  {% else %}
+   <option value="{{e.day}}"> {{e.day}} </option>
+  {% endif %}
+{% endfor %}
+</select>
+<select name="y">
+  <option value="2012" selected>2012</option>
+  <option value="2013">2013</option>
+</select>
+
+Sucessive
+<select name="days4">
+  <option value="1" selected>1 day </option>
+  <option value="4">Mon-Thurs</option>
+</select>
+&nbsp;
+
+
+<br>
+For
+<select name = "weeks">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10" selected>10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select>
+Weeks at&nbsp;
+
+<select name="start_hr">
+  <option value="8">8am </option>
+  <option value="9">9am </option>
+  <option value="10">10am</option>
+  <option value="11">11am</option>
+  <option value="12">12</option>
+  <option value="13">1pm</option>
+  <option value="14">2pm</option>
+  <option value="15">3pm</option>
+  <option value="16">4pm</option>
+  <option value="17">5pm</option>
+  <option value="18" selected>6pm</option>
+  <option value="19">7pm</option>
+  <option value="19:30">7:30pm</option>
+  <option value="20">8pm</option>
+</select>&nbsp;
+&nbsp;for&nbsp;
+<select name="start_len"a>
+  <option value="2" selected>2 </option>
+  <option value="3" >3 </option>
+<select>
+hrs
+
+<br>
+Courts
+<input type="checkbox" name="courts" value="1" checked>1
+<input type="checkbox" name="courts" value="2" checked>2
+<input type="checkbox" name="courts" value="3" checked>3
+<input type="checkbox" name="courts" value="4">4
+<input type="checkbox" name="courts" value="5">5
+<input type="checkbox" name="courts" value="6">6
+<input type="checkbox" name="courts" value="7">7
+<input type="checkbox" name="courts" value="13">13
+<input type="checkbox" name="courts" value="14">14
+<input type="checkbox" name="courts" value="15">15
+
+<p>
+
+<textarea rows="3" cols="50" name="desc" >
+
+</textarea>
+
+
+<p>
+<input type="submit" value="Reserve">
+
+</form>
+
+<!--
+<input type="textarea" rows="3" cols="20" name="desc" >
+-->
+
+</div>
+<p>
+Set the date when Captains can reserve courts
+<div id="open">
+<form name="setopen" action="{{Site}}/doopen" method="POST">
+{% if opendate %} 
+Currently {{opendate.month}}/{{opendate.day}}/{{opendate.year}}
+{% endif %} 
+<br>
+<select name="open_month">
+{% for e in Months %}
+  <option value="{{e.number}}"> {{e.month}} </option>
+{% endfor %}
+</select>
+<select name="open_day">
+{% for e in Days %}
+  {% if e.selected %}
+   <option value="{{e.day}}" selected> {{e.day}} </option>
+  {% else %}
+   <option value="{{e.day}}"> {{e.day}} </option>
+  {% endif %}
+{% endfor %}
+</select>
+<select name="open_year">
+  <option value="2012" selected>2012</option>
+</select>
+<br>
+<input type="submit" value="Set the Date">
+</form>
+</div>
+
+<p>
+
+Add a Captain
+<table id=capt width="510">
+
+<thead>
+<tr>
+<th scope="col">First Name</th>
+<th scope="col">Last Name</th>
+<th scope="col">Username</th>
+<th scope="col">Team</th>
+<th scope="col">Password</th>
+</thead>
+
+<form name="captain" action="{{Site}}/doaddcapt" method="POST">
+<tr>
+<td><input type="text" size=10 name=fname  </td>
+<td><input type="text" size=10 name=lname  </td>
+<td><input type="text" size=10 name=user  </td>
+<td><input type="text" size=10 name=team  </td>
+<td><input type="text" size=10 name=password  </td>
+</tr>
+<tr>
+<td align=center colspan="5"><input type="submit" value="Add Captain"></td>
+</tr>
+</form>
+</table>
+
+
+
+<p>
+Edit Captain password
+<table id=capt width="510">
+
+<thead>
+<tr>
+<th scope="col">Name</th>
+<th scope="col">Username</th>
+<th scope="col">Team</th>
+<th scope="col">Password</th>
+<th scope="col">Count</th>
+</thead>
+
+<form name="captain" action="{{Site}}/doeditcapt" method="POST">
+{% for e in Captains %}
+<tr>
+<td>{{e.fname}} {{e.lname}}</td>
+<td>{{e.user}} </td>
+<td>{{e.team}} </td>
+<input type="hidden" name={{e.key}}[] value={{e.key}}> </td>
+<td><input type="text" size=8 name={{e.key}}[] value={{e.password}}> </td>
+<td><input type="text" size=3 name={{e.key}}[] value={{e.count}}></td>
+</tr>
+{% endfor %}
+<tr>
+<td align=center colspan="5"><input type="submit" value="Edit Captain"></td>
+</tr>
+</form>
+</table>
+
+
+
+</html>
+

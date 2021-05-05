@@ -1,0 +1,168 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+body { background-color:#060; } 
+body { background-color:#d2d2FF; } 
+
+#containerlogin { margin: 1em auto 0 3em; background-color: #d2d2FF; } 
+#containertop { margin: 1em auto 0 1em; padding-bottom: 1em; background-color: #ccfffe; } 
+#container { margin: 0em auto 0 3em; padding-bottom: 3em; background-color: #fff; } 
+
+.rtop { display:block; background:#060; } 
+.rtop * { display: block; height: 1px; overflow: hidden; background:#fff; } 
+.r1{margin: 0 0 0 5px}
+.r2{margin: 0 0 0 3px} 
+.r3{margin: 0 0 0 2px} 
+.r4{margin: 0 0 0 1px; height: 2px} 
+
+#container h1 { margin: 0 0 .5em .5em; font: 2em Arial, Helvetica, sans-serif; color: #060; } 
+
+p {margin-top: 0; } 
+.login {float:left; width:300px; margin-left:25px}  
+
+
+#e50{
+font-family: "Comic Sans MS", "Brush Script MT", cursive;
+font-size:12 px;
+background: #bbfeff;
+border: none;
+height : 25 px;
+border-bottom: 1px solid black;
+width : 50 px;
+
+
+</style>
+<script language="Javascript">
+
+// was used for select all
+function toggle(source){
+ checkboxes = document.getElementsByName("keys")
+ for(var i=0 , n=checkboxes.length ; i<n; i++){
+      checkboxes[i].checked = source.checked;
+ }
+
+}
+
+
+function ShiftSelect(event, current){
+
+   forms =  document.forms.length;
+   len =  document.forms[1].elements.length;
+
+   if(event.shiftKey == false) return
+
+   v =  current.value
+
+// start at j=1, if the first one which is the 'All' checkbox  (not longer in)
+
+   check = false
+// console.log("LOG"+v)
+   for(j = 0; j < len; j++) {
+           elm = document.forms[1].elements[j];
+
+           if (elm.checked == true) {
+                           check = true;
+                       }
+
+           elm.checked = check
+           if(elm.value == v) {
+//                console.log("theyre equal!")
+                  return
+           }
+
+
+   }
+
+
+}
+
+
+
+
+</script>
+
+<body>
+
+<title>Captain</title>
+
+<!--
+<div id=containerlogin>
+ {{ LoginForm }} 
+</div>
+-->
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="logout" method="POST" >
+<input type ="submit" value="Logout">
+
+<input type ="hidden" name="path" value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+
+{% endif %}
+
+</form>
+</div>
+
+
+
+<center>
+<h1> Court Reservations </h1>
+
+
+<table>
+
+<thead>
+<tr>
+<th scope="col">Select</th>
+<th scope="col">Day</th>
+<th scope="col">Date</th>
+<th scope="col">Courts</th>
+<th scope="col">Location</th>
+<th scope="col">Time</th>
+<th scope="col">Description</th>
+</thead>
+
+
+<form name="del"  action="/alldelconfirm" method="POST" >
+
+<input type="submit" value="Delete Court Reservations" />
+<br>
+<!--
+<input type="checkbox" onClick="toggle(this)"/>All <br/>
+-->
+{% for e in CourtList %}
+<tr>
+<td>
+<input type="checkbox" name="keys" value="{{e.key}}" onClick="ShiftSelect(event , this);"> <br>  </input>
+</td>
+<td>{{e.weekday}} </td>
+<td>{{e.date}} </td>
+<td>{{e.courts}} </td>
+<td>{{e.location}} </td>
+<td>{{e.start}} -> {{e.end}} </td>
+<td>{{e.desc}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+
+</form>
+
+
+
+
+</html>
+

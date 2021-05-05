@@ -1,0 +1,55 @@
+<center>
+<h2>Captain  {{Captain.fname }} {{Captain.lname }} </h2>
+<style type="text/css">
+
+<!--
+@import url("/assets/css/courts.css");
+-->
+
+</style>
+
+<body>
+
+<table>
+<tr> 
+<td>Reservation Starting Date</td><td>{{StartDate}} @ {{StartTime}}</td>
+<tr>
+<td>Today</td><td> {{Today}}
+<tr>
+<td>Allowed Reservations </td><td>{{Allowed}}</tr>
+<td>Your reservation count </td><td>{{Captain.count}}</tr>
+
+
+{% if Exceeded %}
+<tr> <td colspan=2> <p>
+  Can't reserve again today.
+  you have {{Captain.count}} reservations already and are limited to
+  {{Allowed}} reservations by end of today<br>
+  Captains are are allowed two reservations per day pr team <br>
+  Please try again tomorrow.
+<td>
+</table>
+{% else %}
+
+
+<tr><td colspan = 2 > </td><tr>
+
+<tr><td colspan=2> <h2>These are the courts you just reserved </h2></tr>
+<tr>
+<td colspan=2>{{CourtDay}} {{CourtDate}}</td>
+<tr><td colspan=2>Courts {{Courts}} </td>
+<tr><td colspan=2>{{CourtStart }} -> {{ CourtEnd }}  </td>
+<!--<td>{{CourtDesc}}</td>-->
+</tr>
+
+
+{% endif %}
+<p>
+<tr><td colspan=2>Go to your <a href="{{Host}}/captain"> Captains Page </a> 
+to see all your reservations
+<tr><td colspan=2>Back to the <a href="{{Host}}/month/{{Month}}/{{Year}}"> Calendar </a> 
+
+<br>
+
+</table>
+

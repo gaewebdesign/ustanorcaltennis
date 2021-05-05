@@ -1,0 +1,18 @@
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="{{Host}}/logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name='path' value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="{{Host}}/login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+
+{% endif %}
+
+</form>
+</div>
+

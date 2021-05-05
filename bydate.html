@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+</style>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/sorttable.js"></script>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/library.js"></script>
+
+<body>
+<center>
+
+<h1> Court Reservations </h1>
+
+ <table align="center" class="sortable">
+ <thead>
+ <tr>
+ <th scope="col">Date</th>
+ <th scope="col">Day</th>
+ <th scope="col">Courts</th>
+ <th scope="col">Time</th>
+ <th scope="col">Captain</th>
+ <th scope="col">Team</th>
+ </thead>
+
+{% for e in Courts %}
+<tr>
+<td>{{e.date}} </td>
+<td>{{e.weekday}} </td>
+<td>{{e.courts}} </td>
+<td>{{e.start}} -> {{e.end}} </td>
+<td>{{e.captain}}</td>
+<td>{{e.team}}</td>
+</tr>
+{% endfor %}
+</table>
+
+

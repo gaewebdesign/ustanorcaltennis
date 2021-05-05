@@ -1,0 +1,147 @@
+<html>
+<head>
+</head>
+
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+</style>
+
+<title>Create</title>
+
+<div id=containerlogin>
+ {{ LoginForm }} 
+</div>
+
+
+<body bgcolor="d2d2ff">
+
+<center>
+
+<h2> Create Captains </h2>
+
+<form method="post"  action="{{Host}}/doccapt" >
+<table>
+<thead>
+<tr>
+<th scope="col">Select</th>
+<th scope="col">Action</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+
+<tr>
+<td><input type="checkbox" name="ccapt" value="ccapt"></td>
+<td> Create Captains</td>
+<td> Create captain user/password accounts </td>
+</tr>
+
+<tr >
+<td colspan="3" align="center"><input type="submit" value="Submit"></td>
+</table>
+</tr>
+
+</form>
+
+
+<h2> Create Courts </h2>
+
+<form method="post"  action="{{Host}}/doccourts" >
+<table>
+<thead>
+<tr>
+<th scope="col">Select</th>
+<th scope="col">Action</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+
+<tr>
+<td><input type="radio" name="ccourt" value="Adults"></td>
+<td> Adults</td>
+<td> Create courts for Adults season </td>
+</tr>
+
+<tr>
+<td><input type="radio" name="ccourt" value="Mixed"></td>
+<td> Mixed</td>
+<td> Create courts for Mixed season </td>
+</tr>
+
+<tr>
+<td><input type="radio" name="ccourt" value="Combo"></td>
+<td> Combo</td>
+<td> Create courts for Combo season </td>
+</tr>
+
+
+
+<tr >
+<td colspan="3" align="center"><input type="submit" value="Submit"></td>
+</table>
+</tr>
+
+</form>
+
+
+
+
+
+
+<h2> Delete Page </h2>
+
+<form method="post"  action="{{Host}}/dodelete" >
+<table>
+<thead>
+<tr>
+<th scope="col">Select</th>
+<th scope="col">Action</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+
+
+
+
+<tr>
+<td><input type="checkbox" name="delete" value="clrcourts"></td>
+<td> Clear Reservations</td>
+<td> Clear all reservations for each Captain</td>
+</tr>
+
+<tr>
+<td><input type="checkbox" name="delete" value="delcourts"></td>
+<td> Delete Reservations</td>
+<td> Delete every reservation.. nothing is left </td>
+</tr>
+
+<tr>
+<td colspan="3"> </td>
+</tr>
+
+
+<tr>
+<td><input type="checkbox" name="delete" value="clrcaptains"></td>
+<td> Clear Captains </td>
+<td> Set all captain accounts to 0 reservations </td>
+</tr>
+
+
+
+<tr>
+<td><input type="checkbox" name="delete" value="delcaptains"></td>
+<td> Delete Captains </td>
+<td> Delete all captain user/password accounts </td>
+</tr>
+
+
+<tr >
+<td colspan="3" align="center"><input type="submit" value="Submit"></td>
+</table>
+</tr>
+
+</form>
+

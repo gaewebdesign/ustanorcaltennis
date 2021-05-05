@@ -1,0 +1,114 @@
+<html>
+<head>
+<link rel="import" href="/templates/logger.html" >
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("/assets/css/courts.css");
+-->
+</style>
+<!--
+http://www.fieldofschemes.com/newstyles.css
+-->
+<body>
+<title>Month</title>
+<!--#include virtual="logger.html" -->
+<!--#include virtual="/templates/logger.html" -->
+<link rel="import" href="logger.html">
+<link rel="import" href="/templates/logger.html">
+
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="{{Host}}/logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name='path' value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="{{Host}}/login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+{% endif %}
+
+</form>
+</div>
+
+
+<div>
+
+ {% if StartDate %}
+ <div id=containerstart>
+   Reservations Start: {{StartDate}}   {{StartTime}} 
+ </div>
+ {% endif %}
+
+</div>
+
+
+
+<center>
+<h1>{{monthname}} {{year}} </h1>
+
+<div id = "containertop">
+<a href="{{Host}}/instructions">Instructions</a><br>
+<a href="{{Host}}/summary">Summary of Reservations</a><br>
+<a href="{{Host}}/captain">Captain's Page</a><br><br>
+<a href= "{{Host}}/month/{{Prev_month}}/{{Prev_year}}" >Previous Month</a> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<a href= "{{Host}}/month/{{Next_month}}/{{Next_year}}" >Next Month</a> 
+</div>
+
+<div id = "container">
+<br>
+<table id="month">
+<thead>
+<tr>
+<th class="weekend" >Sunday</th >
+<th >Monday</th>
+<th >Tuesday</th >
+<th >Wednesday</th >
+<th >Thursday</th > 
+<th >Friday</th >
+<th class="weekend">Saturday</th >
+
+</tr>
+</thead >
+<tbody>
+
+{% for week in Month %}
+   <tr>
+   {% for day in week %}
+      <td class="{{day.classtype}}"> <a href="{{Host}}/courts/{{day.month}}/{{day.day}}/{{day.year}}"> {{ day.day }}</a>
+
+      {{ day.holiday }} <br>
+<span style="font-family: verdana,sans-serif; font-size:12px;">
+      {% for c in day.courts %}
+
+          {{c.time}}
+          {% if c.mine %}
+            <b>
+          {% endif %}
+          {{c.cts}}
+          {% if c.mine %}
+            </b>
+          {% endif %}
+
+          {% if c.mine %}
+              <b>@{{c.location}} </b><br>
+          {% else %}               
+              @{{c.location}} <br>
+          {% endif %}
+
+      {% endfor %}
+</pan>
+
+   {% endfor %}
+   </tr>
+{% endfor %}
+
+</div>
+
+
+

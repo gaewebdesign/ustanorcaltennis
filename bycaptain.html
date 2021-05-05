@@ -1,0 +1,74 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");')
+@import url("assets/css/library.css");')
+-->
+</style>
+<body>
+
+<style type = "text/css">
+</style>
+
+<center>
+
+<h1> Court Reservations </h1>
+
+{% if LoggedIn %}
+<table>
+Captain {{ CaptainReservation.fname }} {{ CaptainReservation.lname }} {{ CaptainReservation.team }} 
+<thead>
+<tr><th scope="col">Day</th>
+<th scope="col">Date</th>
+<th scope="col">Courts</th>
+<th scope="col">Time</th>
+<th scope="col">Description</th>
+</thead>
+
+{% for e in CaptainReservation.courts %}
+<tr>
+<td>{{e.weekday}} </td>
+<td>{{e.date}} </td>
+<td>{{e.courts}} </td>
+<td>{{e.start}} -> {{e.end}} </td>
+<td>{{e.desc}}</td>
+</tr>
+
+<br>
+
+{% endfor %}
+
+</table>
+
+{% endif  %}
+
+
+{% for nextTeam in OtherTeams %}
+<p>
+       {{nextTeam.fname}}   {{nextTeam.lname}} {{nextTeam.team}} 
+
+      <table>
+      <thead>
+      <tr><th scope="col">Day</th>
+      <th scope="col">Date</th>
+      <th scope="col">Courts</th>
+      <th scope="col">Time</th>
+      <th scope="col">Description</th>
+      </thead>
+
+      {% for n in nextTeam.courts %}
+         <tr>
+         <td>{{n.weekday}} </td>
+         <td>{{n.date}} </td>
+         <td>{{n.courts}} </td>
+         <td>{{n.start}} -> {{n.end}} </td>
+         <td>{{n.desc}}</td>
+         </tr>
+      {% endfor %}
+      </table>
+
+{% endfor %}
+

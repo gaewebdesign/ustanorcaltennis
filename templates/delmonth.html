@@ -1,0 +1,163 @@
+<html>
+<head>
+
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("/assets/css/courts.css");
+-->
+</style>
+<!--
+http://www.fieldofschemes.com/newstyles.css
+-->
+
+<script language="Javascript">
+
+function ShiftSelect(event, current){
+
+
+   forms =  document.forms.length;
+   len =  document.forms[1].elements.length;
+
+   if(event.shiftKey == false) return
+
+   v =  current.value
+
+// start at j=1, if the first one which is the 'All' checkbox  (not longer in)
+
+   check = false
+   console.log("LOG: len="+ len)
+   for(j = 0; j < len; j++) {
+           elm = document.forms[1].elements[j];
+
+           if (elm.checked == true) {
+                           check = true;
+                       }
+
+           elm.checked = check
+           if(elm.value == v) {
+//                console.log("theyre equal!")
+                  return
+           }
+
+
+   }
+}
+
+
+</script>
+
+<body>
+<title>Month</title>
+
+
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="{{Host}}/logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name='path' value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="{{Host}}/login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+{% endif %}
+
+</form>
+</div>
+
+
+<div>
+
+ {% if StartDate %}
+ <div id=containerstart>
+   Reservations Start: {{StartDate}}   {{StartTime}} 
+ </div>
+ {% endif %}
+
+</div>
+
+
+
+<center>
+<h1>{{monthname}} {{year}} </h1>
+
+<div id = "containertop">
+<a href="{{Host}}/instructions">Instructions</a><br>
+<a href="{{Host}}/summary">Summary of Reservations</a><br>
+<a href="{{Host}}/captain">Captain's Page</a><br><br>
+<a href= "{{Host}}/month_/{{Prev_month}}/{{Prev_year}}" >Previous Month</a> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<a href= "{{Host}}/month_/{{Next_month}}/{{Next_year}}" >Next Month</a> 
+</div>
+
+<!--  this works
+<form name="delcourt" action="/delcourt" method="POST">
+<input type="submit" value="Delete Court Reservation" />
+{% for week in Month %}
+   {% for day in week %}
+      {% for c in day.courts %}
+          <input type="checkbox" name="keys" value="{{c.key}}">{{c.time}}</input> {{c.cts}} <br>
+      {% endfor %}
+   {% endfor %}
+{% endfor %}
+</form>
+-->
+
+<form name="confirm" action="/delcourtconfirm" method="POST">
+<input type="submit" value="Delete Court Reservation" />
+
+<p>
+
+<div id = "container">
+<br>
+
+<table id="month">
+
+<!-- BUG FIX 
+ remove thead and put in colors by hand 
+ otherwise <thead> prevents checkbox info post to delcourt
+-->
+<!-- <thead> -->
+<tr style="background-color:#9c9;"> 
+<th class="weekend" style="background-color:#9c9;">Sunday</th>
+<th >Monday</th>
+<th >Tuesday</th >
+<th >Wednesday</th >
+<th >Thursday</th > 
+<th >Friday</th >
+<th class="weekend" style="background-color:#9c9;">Saturday</th >
+</tr>
+<!-- </thead > -->
+
+
+{% for week in Month %}
+   <tr>
+   {% for day in week %}
+      <td class="{{day.classtype}}"> <a href="{{Host}}/courts/{{day.month}}/{{day.day}}/{{day.year}}"> {{ day.day }}</a>
+
+      {{ day.holiday }} <br>
+<span style="font-family: verdana,sans-serif; font-size:11px;">
+      {% for c in day.courts %}
+
+          {% if c.mine %}
+              <input type="checkbox" name="" style="opacity:0;" value="{{c.key}}">{{c.time}}</input> <i>{{c.cts}} </i>
+          {% else %}
+              <input type="checkbox" name="keys" value="{{c.key}}" onClick="ShiftSelect(event,this);">{{c.time}}</input> {{c.cts}}
+          {% endif %}
+          <br>
+
+      {% endfor %}
+</span>
+
+   {% endfor %}
+   </tr>
+{% endfor %}
+
+</div>
+
+</form>
+

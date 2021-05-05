@@ -1,0 +1,150 @@
+<html>
+<head>
+</head>
+
+<style type = "text/css"> 
+<!--
+@import url("assets/css/patc.css");
+@import url("assets/css/library.css");
+@import url("assets/css/courts.css");
+-->
+</style>
+<body>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/sorttable.js"></script>
+<script LANGUAGE="JavaScript" SRC="assets/javascript/library.js"></script>
+<body>
+
+<div id=containerlogin>
+{% if LoggedIn %}
+<form name="Logout" action="logout" method="POST" >
+<input type ="submit" value="Logout">
+<input type ="hidden" name="path" value="{{path}}">
+{{User}} {{Team}}
+{% else %}
+<form name="Login" action="login" method="POST" >
+<input type ="submit" value="Login">
+<input type ="hidden" name="path" value="{{path}}">
+<input type ="text" id="e40" size="7" name="username">
+<input type ="text" id="e40" size="7" name="password">
+
+{% endif %}
+
+</form>
+</div>
+
+<div style="margin-left:50px;">
+
+<h1>USTA Schedule System Instructions
+</h1>
+
+
+
+<p>
+
+Welcome to the USTA Scheduler system.  Use this guide to learn how to reserve courts for your USTA team.
+
+<p> Quick Overview<br>
+You will be given a user name and password.  The username/password will typically be your first name and a short password.
+After logging in, you will be able to reserve courts for your USTA team.  The reservation may be for any court present on the monthly calendar.  
+You may pick any courts which are available during one of your USTA HOME weeks.  You do not have to select in order.
+You may reserve courts during week 5 of your season, then reserve for week 3, then reserve week 10. 
+<p>
+Some time after Norcal publishes the schedules for the USTA season, the system will become active for captains to reserve courts for
+their teams.   In order to fairly distribute the courts, each captain will be allowed to reserve  courts for two USTA matches (ie 3 courts for doubles) per day.  
+Assuming that a typical team has around 6 home matches, courts reserved for 2 matches per day means that the reservation process for all
+teams can be finished in 3 days.  
+Captains who have not finished may still make reservations of the remaining  courts.  
+
+The system allows captains to cancel a reservation and replace that reservation with another one.
+<p>
+Some Questions & Answers:
+ <ol>
+ <li> I want to schedule a Week 2 match during Week 5 - is that possible?<br>
+      Yes, you are just reserving courts , you just have to enter the correct date on your USTA team site.  
+ </li>
+
+ <li> Adults, Mixed, Singles and Doubles, is there a difference in the reservations?<br>
+      For doubles seasons (Combo/Mixed), you get 3 courts for 2 hours. For Adults you get enough courts for the 5 matches.
+ </li>
+
+ <li> I'm a captain of two teams, how does that work?<br>
+      You will be given two usernames/password, each tied to one of your teams.  You will allowed two reservations per team per day
+ </li>
+ <li> How do I delete a reservation?<br>
+      When you log in, you will have your own captains page - from there you can delete a reservation.
+ </li>
+ <li> If I delete a reservation, can I make a replacement reservation?<br>
+      Yes, your total reservation count is reduced by one, and you can make another one to replace it.
+ </li>
+
+ <li> What if I'm away during the reservation period?<br>
+      You may give your username/password to a teammate who then can make the reservations. 
+ </li>
+
+ <li> I have a special engagement during week 5, can I make that my first reservation?<br>
+      Yes, make that your priority and reserve that week first.
+ </li>
+
+ <li> 
+      Can I view all the available courts before the reservation period starts?<br>
+      Yes, all the courts will be on the calendar before the reservation period begins.
+ </li>
+
+
+
+ </ol>
+
+<h2>The Process</h2>
+The login prompt is at the top of the page
+<p>
+<input type="submit" value="Login">
+<input type="text" id="e50"  size="7" name="username"> 
+<input type="password" id="e50" size="7" name="password">
+<p>
+Log with your username/password  (in this case the username is melissa)
+<p>
+<input type="submit" value="Login">
+<input type="text" id="e50"  size="7" value="melissa" name="username"> 
+<input type="password" id="e50" size="7" value="abc" name="password">
+<p>
+If successful, this is what you should see<br>
+<input type="submit" value="Logout">
+<input type="text" id="e50"  size="7" value="melissa" name="username"> 
+<input type="password" id="e50" size="7" value="abc" name="password">
+&nbsp;&nbsp;Melissa Lee logged in for Mx7.0D
+
+<p>
+
+View the <a href="{{Host}}">monthly</a> calendar of available courts. Select a date with an open court.
+Any set of courts without a Captain's name is open to be reserved<br>
+<center>
+<img src="/assets/images/instr_month.png" >
+</center>
+<p><br>
+After you've selected a date, you will be presented with the available courts.<br>
+Select a court - in this case, courts 1,2,3 are 9-12pm and 10-12 pm. <br>
+If you have two teams, please, do NOT reserve two consecutive court times and later share them for your two teams.<br>
+Log back in under your 2nd captain account and reserve the courts.<br>
+<center>
+<img src="/assets/images/instr_avail.png" >
+</center
+<p><br>
+If you are logged in, the <a href="{{Host}}/summary" >summary </a> page
+shows all your reserved courts at the top, in addition to  reservations by other captains.
+<p>
+<center>
+<img  src="/assets/images/instr_courts.png" >
+</center>
+<p><br>
+
+Go to your <a href="{{Host}}/captain">captain</a> page to cancel a  reservation.  
+You need to be logged in to cancel a reservation.
+<p>
+<center>
+<img src="/assets/images/instr_captain.png" >
+</center>
+
+
+
+
+

@@ -1,0 +1,27 @@
+cron:
+
+- description: USTA team
+  url: /team
+  schedule: every 6 hours
+  timezone: America/Los_Angeles
+
+- description: USTA syntax reminder
+  url: /update?facility=cup&level=CM6.0
+  schedule: every 8 hours
+  timezone: America/Los_Angeles
+
+- description: USTA first 20 teams
+  url: /update?facility=cup&start=0&end=20
+  schedule: every 6 hours
+  timezone: America/Los_Angeles
+
+- description: USTA next 20
+  url: /update?facility=cup&start=21&end=40
+  schedule: every 7 hours
+  timezone: America/Los_Angeles
+
+# covers Cupertino teams in season
+
+
+
+
